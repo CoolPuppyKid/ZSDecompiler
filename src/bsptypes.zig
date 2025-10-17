@@ -21,6 +21,7 @@ pub const Vector = extern struct {
     z: f32,
 };
 
+pub const Plane = extern struct {
     normal: Vector,
     dist: f32,
     // I cant call it type because thats a zig keyword
