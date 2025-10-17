@@ -1,0 +1,10 @@
+# test compiled maps
+map.bsp
+test.bsp
+
+# out files
+out.vmf
+
+# zig stuff
+zig-out/
+.zig-cache/
