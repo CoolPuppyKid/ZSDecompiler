@@ -23,6 +23,7 @@ pub fn main() !void {
     std.debug.print("Lump 1:\n{s}\n", .{lump1});
 }
 
+/// Reads a lump in the given BSP file
 fn readLump(allocator: std.mem.Allocator, file: *std.fs.File, lump: bspTypes.Lump) ![]u8 {
     try file.seekTo(@intCast(lump.offset));
     const buf = try allocator.alloc(u8, @intCast(lump.length));
