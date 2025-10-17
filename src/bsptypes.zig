@@ -34,7 +34,7 @@ pub const Brush = extern struct {
     contents: i32,
 };
 
-// Bsp > 21
+/// Bsp > 21
 pub const BrushSideNew = extern struct {
     planenum: u16,
     texinfo: i16,
@@ -43,10 +43,17 @@ pub const BrushSideNew = extern struct {
     thin: u8,
 };
 
-// Bsp < 21
+/// Bsp < 21
 pub const BrushSideOld = extern struct {
     planenum: u16,
     texinfo: i16,
     dispinfo: i16,
     bevel: u8,
+};
+
+pub const TexInfo = extern struct {
+    textureVecs: f32[2][4],
+    lightmapVecs: f32[2][4],
+    flags: i32,
+    texdata: i32,
 };

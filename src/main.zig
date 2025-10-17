@@ -1,5 +1,6 @@
 const std = @import("std");
 const bspTypes = @import("bsptypes.zig");
+const vmfTypes = @import("vmftypes.zig");
 
 pub fn main() !void {
     const allocator = std.heap.page_allocator;
@@ -19,14 +20,22 @@ pub fn main() !void {
 
     std.debug.print("BSP FILE:\nIdent: {s},\nVersion: {d},\nRevision: {d}.\n", .{ header.ident, header.version, header.mapRevision });
 
-    const lump1 = try readLump(allocator, &file, header.lumps[1]);
-    std.debug.print("Lump 1:\n{s}\n", .{lump1});
+    const VMFFile: vmfTypes.VMFfile = vmfTypes.VMFfile{};
+
+    const brushes = try readLump([]bspTypes.Brush, allocator, &file, header.lumps[18]);
+
+    for (brushes) |brush| {
+        std.debug.print("{d}\n", .{brush.firstside});
+    }
 }
 
 /// Reads a lump in the given BSP file
-fn readLump(allocator: std.mem.Allocator, file: *std.fs.File, lump: bspTypes.Lump) ![]u8 {
+/// returns a structure
+fn readLump(T: type, allocator: std.mem.Allocator, file: *std.fs.File, lump: bspTypes.Lump) !T {
     try file.seekTo(@intCast(lump.offset));
     const buf = try allocator.alloc(u8, @intCast(lump.length));
     _ = try file.readAll(buf);
-    return buf;
+
+    const out: T = @ptrCast(@alignCast(buf));
+    return out;
 }
