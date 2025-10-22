@@ -10,6 +10,8 @@
 
 ## Memes
 
-![vmf files](https://github.com/user-attachments/assets/e499d8e2-1100-42d6-b7c9-88a47da72816)
-![zig](https://github.com/user-attachments/assets/9cd3a489-d25e-40e8-b01a-bfa9275201dc)
-![vmf docs](https://github.com/user-attachments/assets/a5d2796d-c6d6-4aac-8735-6bb3340ed7c9)
+<div>
+  <img width="200" src="https://github.com/user-attachments/assets/e499d8e2-1100-42d6-b7c9-88a47da72816"></img>
+  <img width="200" src="https://github.com/user-attachments/assets/9cd3a489-d25e-40e8-b01a-bfa9275201dc"></img>
+  <img width="200" src="https://github.com/user-attachments/assets/a5d2796d-c6d6-4aac-8735-6bb3340ed7c9"></img>
+</div>
