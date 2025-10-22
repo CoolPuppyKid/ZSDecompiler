@@ -5,9 +5,18 @@ pub const VMFfile = struct {
     versioninfo: VersionInfo,
 
     // from my knowledge visgroups are not compiled
-    visgroups: []u8 = "visgroups\n{\n}\n",
+    visgroups: []const u8 = "visgroups\n{\n}\n",
     viewsettings: ViewSettings,
     world: World,
+
+    pub fn init() VMFfile {
+        return VMFfile{
+            .versioninfo = VersionInfo.init(),
+            .visgroups = "visgroups\n{\n}\n",
+            .viewsettings = ViewSettings.init(),
+            .world = World.init(),
+        };
+    }
 };
 
 /// "versioninfo" class
@@ -22,6 +31,16 @@ pub const VersionInfo = struct {
 
     /// Always 0 because this tool decompiles maps
     prefab: []const u8 = "0",
+
+    pub fn init() VersionInfo {
+        return VersionInfo{
+            .editorversion = "400",
+            .editorbuild = "100",
+            .mapversion = "0",
+            .formatversion = "100",
+            .prefab = "0",
+        };
+    }
 };
 
 /// hammer editor settings
@@ -31,6 +50,16 @@ pub const ViewSettings = struct {
     bShowLogicalGrid: []const u8 = "0",
     nGridSpacing: []const u8 = "64",
     bShow3DGrid: []const u8 = "0",
+
+    pub fn init() ViewSettings {
+        return ViewSettings{
+            .bSnapToGrid = "1",
+            .bShowGrid = "1",
+            .bShowLogicalGrid = "0",
+            .nGridSpacing = "64",
+            .bShow3DGrid = "0",
+        };
+    }
 };
 
 pub const World = struct {
@@ -39,11 +68,28 @@ pub const World = struct {
     classname: []u8 = "worldspawn",
     skyname: []u8 = "sky_wasteland02",
     solids: []Solid = &[_]Solid{},
+
+    pub fn init() World {
+        return World{
+            .id = "1",
+            .mapversion = "1",
+            .classname = "worldspawn",
+            .skyname = "sky_wasteland02",
+            .solids = &[_]Solid{},
+        };
+    }
 };
 
 pub const Solid = struct {
     id: []u8 = "1",
     sides: []Side = &[_]Solid{},
+
+    pub fn init() Solid {
+        return Solid{
+            .id = "1",
+            .sides = &[_]Side{},
+        };
+    }
 };
 
 pub const Side = struct {
@@ -58,6 +104,22 @@ pub const Side = struct {
     contents: []u8 = "1",
     flags: []u8 = "0",
     dispinfo: Dispinfo,
+
+    pub fn init() Side {
+        return Side{
+            .id = "1",
+            .plane = "NULL",
+            .material = "BRICK/BRICKFLOOR001A",
+            .uaxis = "NULL",
+            .vaxis = "NULL",
+            .rotation = "0",
+            .lightmapscale = "16",
+            .smoothing_groups = "0",
+            .contents = "1",
+            .flags = "0",
+            .dispinfo = Dispinfo{},
+        };
+    }
 };
 
 pub const Dispinfo = struct {};
