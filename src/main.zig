@@ -15,14 +15,24 @@ pub fn main() !void {
     const header: bspTypes.BSPHeader = try reader.readStruct(bspTypes.BSPHeader);
 
     if (std.mem.eql(u8, &header.ident, "VBSP") == false) {
-        return error.GoFuckYourself;
+        return error.InvalidBSP;
     }
 
     std.debug.print("BSP FILE:\nIdent: {s},\nVersion: {d},\nRevision: {d}.\n", .{ header.ident, header.version, header.mapRevision });
 
-    const VMFFile: vmfTypes.VMFfile = vmfTypes.VMFfile{};
+    //const VMFFile: vmfTypes.VMFfile = vmfTypes.VMFfile{};
+    //_ = VMFFile;
 
     const brushes = try readLump([]bspTypes.Brush, allocator, &file, header.lumps[18]);
+    //const planes = try readLump([]bspTypes.Plane, allocator, &file, header.lumps[3]);
+
+    var brushSides: []bspTypes.BrushSides = undefined;
+
+    if (header.version >= 21) {
+        brushSides = .{ .new = try readLump([]bspTypes.BrushSideNew, allocator, &file, header.lumps[19]) };
+    } else {
+        brushSides = .{ .old = try readLump([]bspTypes.BrushSideOld, allocator, &file, header.lumps[19]) };
+    }
 
     for (brushes) |brush| {
         std.debug.print("{d}\n", .{brush.firstside});

@@ -51,6 +51,12 @@ pub const BrushSideOld = extern struct {
     bevel: u8,
 };
 
+// Stupid union cause zig sucks and is stinky
+pub const BrushSides = union(enum) {
+    new: []BrushSideNew,
+    old: []BrushSideOld,
+};
+
 pub const TexInfo = extern struct {
     textureVecs: f32[2][4],
     lightmapVecs: f32[2][4],

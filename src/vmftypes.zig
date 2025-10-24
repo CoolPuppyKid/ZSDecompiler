@@ -82,7 +82,7 @@ pub const World = struct {
 
 pub const Solid = struct {
     id: []u8,
-    sides: []Side = &[_]Solid{},
+    sides: []Side = &[_]Side{},
 
     pub fn init() Solid {
         return Solid{
